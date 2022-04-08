@@ -20,12 +20,10 @@ const setContext = () => {
   const canvas = {
     back: document.getElementById("back"),
     layer: document.getElementById("layer"),
-    // image: document.getElementById("image"),
   };
   ctx = {
     back: canvas.back.getContext("2d"),
     layer: canvas.layer.getContext("2d"),
-    // image: canvas.image.getContext("2d"),
   };
   const scale = window.devicePixelRatio;
   canvas.back.width = canvas.layer.width = cvSize.width * scale;
@@ -41,7 +39,7 @@ const setRange = () => {
       return cvSize.width / notes.lineSize;
     },
     height: (cvSize.height / 24) | 0,
-    leftSpace: 0,//mod
+    leftSpace: 0,
     get rightSpace() {
       return this.leftSpace * 2 + 1;
     },

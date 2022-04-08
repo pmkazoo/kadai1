@@ -211,7 +211,7 @@ const initGame = () => {
   const size = notes.getSize();
   // bar = [];
   //  for (let i = 0; i < notes.lineSize; ++i) bar[i] = new Bar(i, barColor[i]);
-  console.log("linesize:"+notes.lineSize);
+  // console.log("linesize:"+notes.lineSize);
   // for (let i = 0; i < notes.lineSize; ++i) bar[i] = new Bar(i, "#fafad2cc");
   // for (let i = 0; i < notes.lineSize; ++i) bar[i] = new Bar("#fafad2cc");
   bar = new Bar("#fafad2cc");
@@ -224,7 +224,6 @@ const initGame = () => {
 //プレイ
 const gamePlay = async () => {
   GAME_MODE.state = GAME_MODE.play;
-
   initGame();
   const effectColor = BAR_COLOR.map((value) => value + "77");
   let drawCount = 0; //描画カウンター
@@ -342,6 +341,8 @@ const gamePlay = async () => {
 
   player.playVideo();
 
+  console.log("video:"+performance.now());
+
   while (GAME_MODE.state === GAME_MODE.play) {
     clearCanvas(ctx.layer);
     judge();
@@ -393,6 +394,7 @@ const touch = (e) => {
 const push = (kb) => {
   for (let [i, key] of keyList.entries()) {
     if (key === kb) {
+      console.log("type:"+performance.now());
       setInput(i);
       break;
     }
@@ -416,7 +418,10 @@ const input = (isTouch, e) => {
 
 window.onload = () => {
   document.documentElement.addEventListener("touchstart", (e) => input(true, e));
+  let i = 0;
   document.onkeydown = (e) => {
+    if(i===0) console.log("start:"+performance.now());
+    i++;
     if (e.repeat) return;
     input(false, e);
   };
